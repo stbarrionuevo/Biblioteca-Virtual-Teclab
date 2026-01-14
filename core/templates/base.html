@@ -1,0 +1,60 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %} Biblioteca{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style> body { font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji"; } </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="icon" href="{% static 'core/img/1000150422 - copia.jpg' %}" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+  <link rel="stylesheet" href="{% static 'core/css/app.css' %}">
+</head>
+<body>
+{% with request.resolver_match.url_name as urlname %}
+<nav class="navbar navbar-expand-lg border-bottom">
+  <div class="container">
+      <a class="navbar-brand fw-semibold" href="{% url 'dashboard' %}"> <img src="{% static 'core/img/1000150422 - copia.jpg' %}"
+           class="img-logo me-2"
+           alt="Logo de la escuela"></a>
+    <div class="navbar-nav">
+      <a class="nav-link me-5 {% if urlname == '/dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">
+        <i class="fa-solid fa-house"></i> Inicio
+      </a>
+      <a class="nav-link me-5 {% if urlname == 'libros_list' %}active{% endif %}" href="{% url 'libros_list' %}">
+        <i class="fa-solid fa-book"></i> Libros
+      </a>
+      <a class="nav-link me-5 {% if urlname == 'libro_create' %}active{% endif %}" href="{% url 'libro_create' %}">
+        <i class="fa-solid fa-plus"></i> Cargar libro
+      </a>
+      <a class="nav-link me-5 {% if urlname == 'prestamos_list' %}active{% endif %}" href="{% url 'prestamos_list' %}">
+        <i class="fa-solid fa-box-archive"></i> Préstamos
+      </a>
+      <a class="nav-link {% if urlname == 'prestamo_create' %}active{% endif %}" href="{% url 'prestamo_create' %}">
+        <i class="fa-solid fa-plus"></i> Cargar préstamo
+      </a>
+    </div>
+  </div>
+</nav>
+{% endwith %}
+
+
+<main class="container py-4">
+  {% include "partials/_messages.html" %}
+  {% block content %}{% endblock %}
+</main>
+
+
+
+{% include "partials/_footer.html" %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+{# <script src="{% static 'core/js/app.js' %}"></script> #}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</body>
+</html>

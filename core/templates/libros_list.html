@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Libros{% endblock %}
+{% block content %}
+
+<form class="row g-2 mb-3" method="get">
+  <div class="col-md-6">
+    <input class="form-control" type="search" name="q"
+           placeholder="Buscar por título o autor" value="{{ q }}">
+  </div>
+  <div class="col-md-3">
+    <select class="form-select" name="cat">
+      <option value="">Todas las categorías</option>
+      {% for c in cats %}
+        <option value="{{ c }}" {% if cat == c %}selected{% endif %}>{{ c }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-2">
+    <select class="form-select" name="per_page">
+      <option value="5"  {% if per_page == 5  %}selected{% endif %}>5 por página</option>
+      <option value="10" {% if per_page == 10 %}selected{% endif %}>10 por página</option>
+      <option value="20" {% if per_page == 20 %}selected{% endif %}>20 por página</option>
+    </select>
+  </div>
+  <div class="col-md-1">
+    <button class="btn btn-primary w-100">OK</button>
+  </div>
+</form>
+
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover table-sticky">
+        <thead>
+          <tr>
+            <th class="px-3">⤿ Título</th>
+            <th>⤿ Autor</th>
+            <th>⤿ Categoría</th>
+            <th class="text-center" style="width:140px">Estado</th>
+            <th class="text-center" style="width:140px">Stock</th>
+            <th class="text-center" style="width:140px">Acciones </th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for l in libros %}
+          <tr>
+            <td class="px-3">{{ l.titulo }}</td>
+            <td>{{ l.autor|default:"—" }}</td>
+            <td>{{ l.categorias|default:"—" }}</td>
+
+            <td class="text-center">
+                {% if l.disponibles|default:0 > 0 %}
+                  <span class="badge bg-success">Disponible</span>
+                {% else %}
+                  <span class="badge bg-danger">Prestado</span>
+  {% endif %}
+            </td>
+
+            <td class="text-center">
+              <span class="badge bg-secondary" title="Disponibles">D: {{ l.disponibles|default:"0" }}</span>
+              <span class="badge bg-secondary ms-1" title="Prestados">P: {{ l.prestados|default:"0" }}</span>
+            </td>
+            <td>
+                 <form method="post" action="{% url 'libro_eliminar' l.id %}" class="px-3 py-1">
+                {% csrf_token %}
+                <button type="submit" class="dropdown-item text-danger"
+                        onclick="return confirm('Esta acción eliminará el libro. ¿Continuar?');">
+                  Eliminar
+                </button>
+              </form>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="5" class="p-4">
+              <div class="empty-state text-center">
+                {% if q or cat %}No hay resultados con esos filtros.{% else %}Todavía no hay libros cargados.{% endif %}
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% if pages > 1 %}
+<nav class="d-flex justify-content-between align-items-center mt-3">
+  <div class="text-muted">Total: {{ total }}</div>
+  <ul class="pagination pagination-sm mb-0">
+    <li class="page-item {% if page == 1 %}disabled{% endif %}">
+      <a class="page-link" href="?{{ querystring_base }}&page={{ page|add:'-1' }}">Anterior</a>
+    </li>
+    {% for p in page_range %}
+      <li class="page-item {% if p == page %}active{% endif %}">
+        <a class="page-link" href="?{{ querystring_base }}&page={{ p }}">{{ p }}</a>
+      </li>
+    {% endfor %}
+    <li class="page-item {% if page == pages %}disabled{% endif %}">
+      <a class="page-link" href="?{{ querystring_base }}&page={{ page|add:'1' }}">Siguiente</a>
+    </li>
+  </ul>
+</nav>
+<div class="mt-3 d-flex justify-content-end gap-2">
+
+  <a class="btn btn-success"
+     href="{% url 'libros_export' %}?q={{ q|urlencode }}&cat={{ cat|urlencode }}">
+    Descargar Catálogo
+  </a>
+
+
+</div>
+{% endif %}
+
+{% endblock %}

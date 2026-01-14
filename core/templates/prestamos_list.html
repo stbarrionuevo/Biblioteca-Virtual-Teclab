@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Préstamos activos{% endblock %}
+{% if messages %}
+  <div class="container py-2">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} mb-2">{{ message }}</div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% block content %}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Alumno</th>
+      <th>DNI</th>
+      <th>Libro</th>
+      <th>Prestado</th>
+      <th>Vence</th>
+      <th>Estado</th>
+      <th class="text-end">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for p in prestamos %}
+    <tr>
+      <td>{{ p.alumno }}</td>
+      <td>{{ p.dni }}</td>
+      <td>{{ p.libro }}</td>
+      <td>{{ p.fecha_prestamo }}</td>
+      <td>{{ p.vence }}</td>
+      <td>
+        {% now "Ymd" as hoy_ymd %}
+          {% with vence_ymd=p.vence|date:"Ymd" %}
+            {% if p.estado == "DEVUELTO" %}
+              <span class="badge bg-secondary">Devuelto</span>
+            {% elif vence_ymd < hoy_ymd %}
+              <span class="badge bg-danger">Vencido</span>
+            {% elif p.estado == "RENOVADO" %}
+              <span class="badge bg-warning text-dark">Renovado</span>
+            {% else %}
+              <span class="badge bg-primary">Activo</span>
+            {% endif %}
+          {% endwith %}
+      </td>
+      <td class="text-end">
+        <div class="dropdown">
+          <button class="btn btn-sm  btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Acción
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+
+            <!-- Renovar -->
+            <li>
+              <form method="post" action="{% url 'prestamo_renovar' p.id %}" class="px-3 py-1">
+                {% csrf_token %}
+                <button type="submit" class="dropdown-item text-warning"
+                        onclick="return confirm('¿Renovar este préstamo por 7 días?');">
+                  Renovar +7 días
+                </button>
+              </form>
+            </li>
+
+            <!-- Devolver -->
+            <li>
+              <form method="post" action="{% url 'prestamo_devolver' p.id %}" class="px-3 py-1">
+                {% csrf_token %}
+                <button type="submit" class="dropdown-item text-success"
+                        onclick="return confirm('¿Marcar como DEVUELTO y liberar el ejemplar?');">
+                  Devolver
+                </button>
+              </form>
+            </li>
+
+            <li><hr class="dropdown-divider"></li>
+
+           
+            <li>
+              <form method="post" action="{% url 'prestamo_eliminar' p.id %}" class="px-3 py-1">
+                {% csrf_token %}
+                <button type="submit" class="dropdown-item text-danger"
+                        onclick="return confirm('Esta acción eliminará el préstamo. ¿Continuar?');">
+                  Eliminar
+                </button>
+              </form>
+            </li>
+
+          </ul>
+        </div>
+      </td>
+    </tr>
+  {% empty %}
+    <tr>
+      <td colspan="7" class="text-center p-4 text-muted">No hay préstamos.</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

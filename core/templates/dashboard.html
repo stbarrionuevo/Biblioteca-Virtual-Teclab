@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Biblioteca Virtual{% endblock %}
+{% block content %}
+
+
+<div class="row g-3">
+  <div class="col-md-4">
+    <a href="{% url 'libros_list' %}" class="text-decoration-none">
+      <div class="card text-white h-100 shadow">
+        <div class="card-body">
+          <h6>Total libros</h6>
+          <h3 class="mb-0 a-dash">{{ total|default:"0" }}</h3>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-md-4">
+    <a href="{% url 'prestamos_list' %}" class="text-decoration-none">
+      <div class="card text-white h-100 shadow">
+        <div class="card-body">
+          <h6>Prestados</h6>
+          <h3 class="mb-1 a-dash">{{ prestados|default:"0" }}</h3>
+          <small>{{ ocupacion|floatformat:0 }}% del total</small>
+          <div class="progress mt-2 " role="progressbar" aria-label="Ocupación">
+            <div class="progress-bar " style="width: {{ ocupacion }}%"></div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white h-100 shadow">
+      <div class="card-body">
+        <h6>Disponibles</h6>
+        <h3 class="mb-0 a-dash">{{ disponibles|default:"0" }}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row g-3 mt-3">
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <h6>Vencen en 7 días</h6>
+        {% if vence_7d %}
+          <ul class="list-group list-group-flush">
+            {% for p in vence_7d %}
+              <li class="list-group-item d-flex justify-content-between">
+                <span>{{ p.alumno }} — {{ p.libro }}</span>
+                <span class="badge bg-warning">{{ p.vence|date:"Y-m-d" }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <div class="text-muted">Sin vencimientos próximos</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <h6>Atrasados</h6>
+        {% if atrasados %}
+          <ul class="list-group list-group-flush">
+            {% for p in atrasados %}
+              <li class="list-group-item d-flex justify-content-between">
+                <span>{{ p.alumno }} — {{ p.libro }}</span>
+                <span class="badge bg-danger">{{ p.vence|date:"Y-m-d" }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <div class="text-muted">Sin préstamos atrasados</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

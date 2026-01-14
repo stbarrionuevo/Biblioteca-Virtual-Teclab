@@ -1,0 +1,160 @@
+:root{
+  --bg: #f7f8fa;
+  --card: #173753;
+  --text: #1b1f23;
+  --muted: #6b7280;
+  --primary: #a71a5f;    
+  --primary-600: #e7c45e;
+  --ring: rgba(37, 99, 235, .25);
+}
+
+html, body { background: var(--bg); color: var(--text);  height: 100%;}
+
+body{
+  margin: 0;                 
+  min-height: 100dvh;      
+  display: flex;
+  flex-direction: column;    
+  background: var(--bg);
+  color: var(--text);
+}
+
+.a-dash{
+  text-decoration: none !important;
+  color: #1b1f23;
+}
+main { flex: 1; } 
+.navbar { background: var(--primary) !important; box-shadow: 0 1px 0 rgba(0,0,0,.06); }
+.navbar-brand{ 
+    color: #f2f4f7 !important;
+    font-family: "Slabo 27px", serif;
+    font-size: 2em;
+    
+}
+
+
+a img.img-logo
+ {
+    height: 3em;
+    width: auto;
+    object-fit: contain;
+}
+.navbar .nav-link{ 
+    color: var(--bg);
+    font-family: "Slabo 27px", serif;
+ }
+.nav-link:hover { 
+    transition: all 0.5s;
+    border: 1px solid #f2f4f7;
+    border-radius: 10px;
+    opacity: 1; text-decoration: underline;
+    color: #f2f4f7; }
+
+
+
+
+
+.card { border: 1px double rgba(0,0,0,.06); 
+    background: var(--primary-600);
+    box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.card .card-body h6 { color: #000; text-transform: uppercase; letter-spacing: .04em; font-size: .8rem; }
+
+.progress-bar {
+  background: var(--primary);
+}
+
+.form-control, .form-select {
+  border-radius: .6rem;
+  border-color: rgba(0,0,0,.12);
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 .2rem var(--ring);
+}
+
+
+.btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.btn-primary:hover { 
+    background: var(--primary-600); 
+    border-color: var(--primary-600);
+    transition: all 1s;
+ }
+
+ .btn-cat{
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #f7f8fa;
+ }
+
+ .btn-cat:hover { 
+    background: var(--primary-600); 
+    border-color: var(--primary-600);
+    transition: all 1s;
+ }
+
+.table { margin-bottom: 0; }
+.table thead th { background: #f2f4f7; font-weight: 600; border-bottom: 1px solid rgba(0,0,0,.08); }
+.table-hover tbody tr:hover { background: #fafafa; }
+
+
+.badge.bg-success { background: #16a34a !important; }
+.badge.bg-danger  { background: #dc2626 !important; }
+.badge.bg-warning { background: #f59e0b !important; }
+.badge.bg-secondary { background: #6b7280 !important; }
+
+
+.pagination .page-link { border: none; color: var(--muted); }
+.pagination .page-item.active .page-link { background: var(--primary); color: #fff; }
+.pagination .page-item .page-link:hover { 
+    transition: all 1s;
+    color: #f2f4f7;
+    background: var(--primary-600); 
+    border-color: var(--primary-600);
+ }
+
+
+.empty-state {
+  background: #a71a5f;;
+  border: 1px dashed rgba(0,0,0,.15);
+  border-radius: .8rem;
+  padding: 2rem;
+  
+}
+
+
+.table-sticky thead th {
+  position: sticky; top: 0; z-index: 1;
+}
+
+.site-footer {
+  background: var(--primary);  
+  color: #fff;
+  border-top: 1px solid rgba(0,0,0,.05);
+}
+.site-footer a { color: #fff; text-decoration: none; opacity: .85;font-family: "Slabo 27px", serif; }
+.site-footer a:hover { opacity: 1; text-decoration: underline; }
+
+
+.footer-bottom{
+  background-color: rgba(255, 255, 255, 0.1); 
+  border-top: 1px solid rgba(255, 255, 255, 0.2); 
+  color: rgba(255, 255, 255, 0.6); 
+}
+/*** 
+#173753 PRUSSIAN L-> CLARA
+#6DAEDB CAAROLINA L-> OSCURA
+#2892D7 CELESTIAL BLUE  L-> OSCURA
+#1B4353 CHARCOAL L-> CLARA
+#1D70A2 BICE BLUE L-> CLARA
+
+https://coolors.co/173753-6daedb-2892d7-1b4353-1d70a2
+
+
+##a71a5f
+#e7c45e
+#fbfcf5
+#fbfcfc
+***/

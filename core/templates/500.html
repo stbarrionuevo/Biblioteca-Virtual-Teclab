@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Error del servidor{% endblock %}
+{% block content %}
+<div class="text-center py-5">
+  <div class="alert alert-danger"><h1 class="display-6">Ocurrió un error</h1></div>
+  {% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+  <p class="text-muted">Estamos trabajando para solucionarlo.</p>
+  <a href="{% url 'dashboard' %}" class="btn btn-primary">Ir al inicio</a>
+</div>
+{% endblock %}

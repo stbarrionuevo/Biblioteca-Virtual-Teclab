@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}ERROR 404 — No encontrado{% endblock %}
+{% block content %}
+<div class="text-center py-5">
+    
+  <div class="alert alert-danger"><h1 class="display-6">Página no encontrada</h1></div>
+  <p class="text-muted">La ruta solicitada no existe.</p>
+  <a href="{% url 'dashboard' %}" class="btn btn-primary">Ir al inicio</a>
+</div>
+{% endblock %}

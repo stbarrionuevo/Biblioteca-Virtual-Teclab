@@ -1,0 +1,1 @@
+python manage.py import_libros "C:\Users\W10\Desktop\Sistematización-de-libros-de-biblioteca.csv" --dry-run --debug --delimiter "," --header-row 3
