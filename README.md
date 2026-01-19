@@ -175,16 +175,16 @@ Eliminar:/prestamos/<id>/eliminar/ (POST)
 ## 📸 Capturas del sistema
 
 ### Dashboard
-![Dashboard](https://github.com/stbarrionuevo/Biblioteca-Virtual-Teclab/blob/main/screenshots/layout-biblioteca.png)
+![Dashboard](https://raw.github.com/stbarrionuevo/Biblioteca-Virtual-Teclab/main/screenshots/layout-biblioteca.png)
 
 ### Gestión de libros
-![Libros](https://github.com/stbarrionuevo/Biblioteca-Virtual-Teclab/blob/main/screenshots/libros.png)
+![Libros](https://raw.github.com/stbarrionuevo/Biblioteca-Virtual-Teclab/main/screenshots/libros.png)
 
 ### Préstamos
-![Préstamos](https://github.com/stbarrionuevo/Biblioteca-Virtual-Teclab/blob/main/screenshots/prestamos-form.png)
+![Préstamos](https://raw.github.com/stbarrionuevo/Biblioteca-Virtual-Teclab/main/screenshots/prestamos-form.png)
 
 ### Carga de libro
-![Cargar libro](https://github.com/stbarrionuevo/Biblioteca-Virtual-Teclab/blob/main/screenshots/cargar-libro.png)
+![Cargar libro](https://raw.github.com/stbarrionuevo/Biblioteca-Virtual-Teclab/main/screenshots/cargar-libro.png)
 
 
 Categorías
