@@ -175,7 +175,7 @@ Eliminar:/prestamos/<id>/eliminar/ (POST)
 ## 📸 Capturas del sistema
 
 ### Dashboard
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/layout-biblioteca.png)
 
 ### Gestión de libros
 ![Libros](screenshots/libros.png)
