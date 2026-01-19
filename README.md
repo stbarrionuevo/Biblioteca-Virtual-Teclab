@@ -172,6 +172,21 @@ Devolver:/prestamos/<id>/devolver/ (POST)
 
 Eliminar:/prestamos/<id>/eliminar/ (POST)
 
+## 📸 Capturas del sistema
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Gestión de libros
+![Libros](screenshots/libros.png)
+
+### Préstamos
+![Préstamos](screenshots/prestamos.png)
+
+### Carga de libro
+![Cargar libro](screenshots/cargar-libro.png)
+
+
 Categorías
 
 Crear (AJAX): /categorias/create/ (POST, JSON)
